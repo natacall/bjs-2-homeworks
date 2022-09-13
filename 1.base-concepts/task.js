@@ -4,8 +4,7 @@ function solveEquation(a, b, c) {
   let arr = [];
   let result = Math.pow(b, 2) - 4 * a * c;
 
-  if (result < 0) {
-  } else if (result == 0) {
+ if (result == 0) {
     arr = [-b / (2 * a)]
   } else if (result > 0) {
     arr.push((-b + Math.sqrt(result)) / (2 * a));
@@ -19,7 +18,9 @@ solveEquation(4, 18, 9)
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
 
-  // код для задачи №2 писать здесь
+  if (isNan(percent)) { 
+    return 
+  }
 
   return totalAmount;
 }
