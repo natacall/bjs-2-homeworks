@@ -27,8 +27,8 @@ function parseCount(parseNum) {
       this.b = b;
       this.c = c;
     }
-    getPerimeter(number) {
-      return number = this.a + this.b + this.c;
+    getPerimeter() {
+      return this.a + this.b + this.c;
     }
     getArea() {
       let p = this.getPerimeter() / 2;
