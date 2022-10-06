@@ -13,12 +13,12 @@ class AlarmClock {
         else if (this.alarmCollection.find(clock => clock.id === id)){
             return console.error('Будильник с таким id уже существует');
         }
-        return this. alarmCollection.push({id, time, callback});
+        return this.alarmCollection.push({id, time, callback});
     }
 
     removeClock(id) {
         const start = this.alarmCollection.length;
-        this.alarmCollection = this.alarmCollection.filter(call => call.id !== id);
+        this.alarmCollection = this.alarmCollection.filter(clock => clock.id !== id);
         const end = this.alarmCollection.length;
         return start > end;
       }
@@ -29,13 +29,13 @@ class AlarmClock {
 
     start() {
         const checkClock = (clock) => {
-            if (alarm.time === this.getCurrentFormattedTime()) {
+            if (clock.time === this.getCurrentFormattedTime()) {
               clock.callback();
             }
           }
         if (this.time === null) {
           this.time = setInterval(() => {
-            this.alarmCollection.forEach(clock => checkClock.bind(clock));
+            this.alarmCollection.forEach(clock => checkClock(clock));
           }, 1000);
         }
         return;
