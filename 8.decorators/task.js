@@ -22,24 +22,26 @@
 
   function debounceDecoratorNew(func) {
     let flag = false;
-    
-    return function wrapper(...args) {
+    let timeout;
+    return function(...args) {
+      clearTimeout(timeout)
       wrapper.count++;
       if (flag) {
         return;
       }
+      const result = func(...args)
       func.call(this, ...args);
       flag = true;
-      setTimeout(() => {
-        flag = false;
-        wrapper.count++;
+      timeout = setTimeout(() => {
+        flag = false,
         func.call(this, ...args)
       });
-      wrapper.count = 0;
-      return wrapper;
+      result.count = 0;
+      return result;
     }
   }
 
+  
 
 
 
