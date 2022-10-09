@@ -20,25 +20,28 @@
     return wrapper;
   }
 
-  function debounceDecoratorNew(func) {
-    let flag = false;
+
+
+  function debounceDecoratorNew(func, ms) {
     let timeout;
-    return function(...args) {
-      clearTimeout(timeout)
-      wrapper.count++;
+    let flag = true;
+    function wrapper(...args) {
+      wrapper.allCount++;
       if (flag) {
-        return;
-      }
-      const result = func(...args)
-      func.call(this, ...args);
-      flag = true;
+        flag = false;
+        wrapper.count++;
+        func.call(this, ...args);
+        }
+  
       timeout = setTimeout(() => {
-        flag = false,
-        func.call(this, ...args)
-      });
-      result.count = 0;
-      return result;
-    }
+        flag = true;
+        wrapper.count++;
+        func.call(this, ...args);
+      }, ms);
+    };
+    wrapper.count = 0;
+    wrapper.allCount = 0;;
+    return wrapper;
   }
 
   
